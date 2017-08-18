@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+# Usage: $0 user/repo
+
+set -euf -o pipefail
+. functions.sh
+
+repo=$1
+fetch "repos/${repo}/issues" "state=all&per_page=100"
