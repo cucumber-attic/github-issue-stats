@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'ghis'
+
+issues = Issues.new(ARGV[0])
+
+puts "timestamp\tclosed\topen\tlead_time"
+issues.timeline.each do |t|
+  open = t[1][:open]
+  closed = t[1][:closed]
+  lead_time_days = t[1][:lead_time] / (3600 * 24)
+  puts "#{t[0].iso8601}\t#{closed}\t#{open}\t#{lead_time_days}"
+  [t[0].iso8601, closed, open, "%.1f" % lead_time_days]
+end
