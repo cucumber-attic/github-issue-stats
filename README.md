@@ -17,7 +17,7 @@ Authenticate with GitHub:
 
 Fetch a copy of GitHub issues to disk:
 
-    ./fetch-issues cucumber/cucumber-jvm
+    scripts/fetch-issues cucumber/cucumber-jvm
 
 Generate the stats as a [tsv](https://en.wikipedia.org/wiki/Tab-separated_values):
 

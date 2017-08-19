@@ -3,7 +3,8 @@
 # Usage: $0 user/repo
 
 set -euf -o pipefail
-. functions.sh
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+. "${DIR}/functions.sh"
 
 repo=$1
 fetch "repos/${repo}/issues" "state=all&per_page=100"

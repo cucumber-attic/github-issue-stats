@@ -22,7 +22,7 @@ function fetch { # path query
     if [ "${json}" == "[]" ]; then
       break
     fi
-    echo "${json}" > "${path}/page-${page}".json
+    echo "${json}" > "${path}/page-$(printf "%03d" "${page}").json"
     page=$((page+1))
   done
 
