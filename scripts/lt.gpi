@@ -1,0 +1,17 @@
+set xdata time
+set timefmt "%Y-%m-%dT%H:%M:%SZ"
+set datafile separator "\t"
+set terminal png size 768,768 enhanced truecolor font 'Roboto,9'
+set ylabel "Days"
+set xlabel "Date"
+
+
+set pointsize 0.8
+set border 11
+set xtics out
+set tics front
+set key below
+
+plot tsv using 1:4 title 'Lead time' with \
+  linespoints linecolor rgb "#337dff" linewidth 2 \
+  pointtype 7 pointsize 1

@@ -7,14 +7,23 @@ class Issues
   end
 
   def timeline
-    start = timestamps[0]
-    finish = timestamps[-1]
-
     timeline = []
     timestamps.each do |timestamp|
       status = {unborn: 0, open: 0, closed: 0}
+
+      # Calculate a lead time sample for issues closed at this timestamp
+      lead_time_issues = []
       @issues.each do |issue|
         status[issue.status(timestamp)] += 1
+        if issue.closed_at == timestamp
+          lead_time_issues << issue
+        end
+      end
+      if lead_time_issues.any?
+        lead_time_sum = lead_time_issues.map(&:lead_time).inject(0.0) { |sum, lt| sum + lt}
+        lead_time_sample = lead_time_sum / lead_time_issues.size
+        status[:lead_time_sample] = lead_time_sample
+        status[:closed_issues] = lead_time_issues.map(&:number).join(',')
       end
 
       entry = [timestamp, status.dup]
@@ -28,7 +37,7 @@ class Issues
           break
         end
       end
-      lead_time = (timestamp-time_where_total_count_like_closed)
+      lead_time = (timestamp - time_where_total_count_like_closed)
       entry[1][:lead_time] = lead_time
     end
 
@@ -36,7 +45,7 @@ class Issues
   end
 
   def timestamps
-    @timestamps ||= @issues.map {|i| [i.created_at, i.closed_at]}.flatten.compact.sort
+    @timestamps ||= @issues.map {|i| [i.created_at, i.closed_at]}.flatten.compact.sort.uniq
   end
 end
 
@@ -51,6 +60,14 @@ class Issue
 
   def closed_at
     @closed_at ||= @hash['closed_at'].nil? ? nil : Time.parse(@hash['closed_at'])
+  end
+
+  def number
+    @hash['number']
+  end
+
+  def lead_time
+    @closed_at ? closed_at - created_at : nil
   end
 
   def status(timestamp)

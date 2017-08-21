@@ -2,13 +2,23 @@
 
 require 'ghis'
 
+def days(s)
+  s / (3600 * 24)
+end
+
 issues = Issues.new(ARGV[0])
 
-puts "timestamp\tclosed\topen\tlead_time"
+puts "timestamp\tclosed\topen\tlead_time\tlead_time_sample\tclosed_issues"
 issues.timeline.each do |t|
   open = t[1][:open]
   closed = t[1][:closed]
-  lead_time_days = t[1][:lead_time] / (3600 * 24)
-  puts "#{t[0].iso8601}\t#{closed}\t#{open}\t#{lead_time_days}"
+  lead_time_days = days(t[1][:lead_time])
+
+  lts = t[1][:lead_time_sample]
+  lead_time_sample_days = lts.nil? ? 'nan' : days(lts)
+
+  closed_issues = t[1][:closed_issues]
+
+  puts "#{t[0].iso8601}\t#{closed}\t#{open}\t#{lead_time_days}\t#{lead_time_sample_days}\t#{closed_issues}"
   [t[0].iso8601, closed, open, "%.1f" % lead_time_days]
 end
