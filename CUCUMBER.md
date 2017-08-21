@@ -55,3 +55,57 @@ The charts below show some stats for various Cucumber repos
 ### Closed Ticket Lead Time
 
 ![Closed Ticket Lead Time](repos/cucumber/cucumber-js/lts.png)
+
+## Aruba
+
+### Cumulative Flow Diagram
+
+![Cumulative Flow Diagram](repos/cucumber/aruba/cfd.png)
+
+### Open Issues
+
+![Open Issues](repos/cucumber/aruba/open.png)
+
+### Average Lead Time
+
+![Average Lead Time](repos/cucumber/aruba/lt.png)
+
+### Closed Ticket Lead Time
+
+![Closed Ticket Lead Time](repos/cucumber/aruba/lts.png)
+
+## Cucumber-Rails
+
+### Cumulative Flow Diagram
+
+![Cumulative Flow Diagram](repos/cucumber/cucumber-rails/cfd.png)
+
+### Open Issues
+
+![Open Issues](repos/cucumber/cucumber-rails/open.png)
+
+### Average Lead Time
+
+![Average Lead Time](repos/cucumber/cucumber-rails/lt.png)
+
+### Closed Ticket Lead Time
+
+![Closed Ticket Lead Time](repos/cucumber/cucumber-rails/lts.png)
+
+## Cucumber (Monorepo)
+
+### Cumulative Flow Diagram
+
+![Cumulative Flow Diagram](repos/cucumber/cucumber/cfd.png)
+
+### Open Issues
+
+![Open Issues](repos/cucumber/cucumber/open.png)
+
+### Average Lead Time
+
+![Average Lead Time](repos/cucumber/cucumber/lt.png)
+
+### Closed Ticket Lead Time
+
+![Closed Ticket Lead Time](repos/cucumber/cucumber/lts.png)
