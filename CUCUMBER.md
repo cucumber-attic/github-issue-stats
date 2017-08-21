@@ -1,8 +1,26 @@
 # Cucumber Issue Stats
 
-The charts below show some stats for various Cucumber repos
+The charts below show some GitHub issue stats for various Cucumber repos.
+
+*21 Aug 2017*
+
+|                   | Open Issues   | Average Lead Time (days) |
+| ----------------- | ------------- | -------------------------|
+| Cucumber-Ruby     |            86 |                      148 |
+| Cucumber-JVM      |           112 |                      235 |
+| Cucumber.js       |            24 |                       21 |
+| Aruba             |            55 |                      216 |
+| Cucumber-Rails    |            11 |                      232 |
+| Cucumber Monorepo |            65 |                      129 |
 
 ## Cucumber-Ruby
+
+*21 Aug 2017* - Over the past 3 years, the number of open issues have been steadily growing
+from about 20 to about 90. In the past months there has been a push to close tickets,
+which has brought the average lead time down from 250 to 150 days.
+
+While many tickets have been closed, many new ones have been opened, so the number of
+open tickets is still increasing.
 
 ### Cumulative Flow Diagram
 
@@ -22,6 +40,16 @@ The charts below show some stats for various Cucumber repos
 
 ## Cucumber-JVM
 
+*21 Aug 2017* - The number of open issues have been steadily growing
+from since the inception of the project, until May 2017.
+
+In 4 months
+(May-Aug 2017) the number of open tickets has been halved from 220 to 110,
+which is a tremendous effort.
+
+During the same period, the average lead time has been reduced from 630 days to
+235 days. This is still quite high, but the project is heading in the right direction.
+
 ### Cumulative Flow Diagram
 
 ![Cumulative Flow Diagram](repos/cucumber/cucumber-jvm/cfd.png)
@@ -39,6 +67,12 @@ The charts below show some stats for various Cucumber repos
 ![Closed Ticket Lead Time](repos/cucumber/cucumber-jvm/lts.png)
 
 ## Cucumber.js
+
+Cucumber.js is the best performing projects of all Cucumber projects.
+
+The number of open issues has been steadily decreasing since 2015, and is now
+at around 20, which is acceptable. The average lead time is low as well,
+about 20 days.
 
 ### Cumulative Flow Diagram
 
