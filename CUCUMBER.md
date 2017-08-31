@@ -6,12 +6,12 @@ The charts below show some GitHub issue stats for various Cucumber repos.
 
 |                   | Open Issues   | Average Lead Time (days) | Open Issues Trend |
 | ----------------- | ------------- | -------------------------| ------------------|
-| Cucumber-Ruby     |            86 |                      148 |             ❌    |
-| Cucumber-JVM      |           112 |                      235 |             ✅    |
-| Cucumber.js       |            24 |                       21 |             ✅    |
-| Aruba             |            55 |                      216 |             ❌    |
-| Cucumber-Rails    |            11 |                      232 |             ✅    |
-| Cucumber Monorepo |            65 |                      129 |             ❌    |
+| Cucumber-Ruby     |            90 |                      152 |             ❌    |
+| Cucumber-JVM      |           112 |                      203 |             ✅    |
+| Cucumber.js       |            21 |                       20 |             ✅    |
+| Aruba             |            56 |                      212 |             ❌    |
+| Cucumber-Rails    |            11 |                      266 |             ✅    |
+| Cucumber Monorepo |            66 |                      118 |             ❌    |
 
 ## Cucumber-Ruby
 
