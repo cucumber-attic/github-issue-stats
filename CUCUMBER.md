@@ -6,12 +6,13 @@ The charts below show some GitHub issue stats for various Cucumber repos.
 
 |                   | Open Issues   | Average Lead Time (days) | Open Issues Trend |
 | ----------------- | ------------- | -------------------------| ------------------|
-| Cucumber-Ruby     |            90 |                      152 |             ❌    |
-| Cucumber-JVM      |           112 |                      203 |             ✅    |
-| Cucumber.js       |            21 |                       20 |             ✅    |
+| Cucumber-Ruby     |            97 |                      132 |             ❌    |
+| Cucumber-Ruby Core|            14 |                      138 |             ✅    |
+| Cucumber-JVM      |            46 |                       42 |             ✅    |
+| Cucumber.js       |            20 |                       24 |             ✅    |
 | Aruba             |            56 |                      212 |             ❌    |
-| Cucumber-Rails    |            11 |                      266 |             ✅    |
-| Cucumber Monorepo |            66 |                      118 |             ❌    |
+| Cucumber-Rails    |            12 |                      184 |             ✅    |
+| Cucumber Monorepo |            63 |                      116 |             ❌    |
 
 ## Cucumber-Ruby
 
@@ -38,12 +39,36 @@ open tickets is still increasing.
 
 ![Closed Ticket Lead Time](repos/cucumber/cucumber-ruby/lts.png)
 
+## Cucumber-Ruby Core
+
+### Cumulative Flow Diagram
+
+![Cumulative Flow Diagram](repos/cucumber/cucumber-ruby-core/cfd.png)
+
+### Open Issues
+
+![Open Issues](repos/cucumber/cucumber-ruby-core/open.png)
+
+### Average Lead Time
+
+![Average Lead Time](repos/cucumber/cucumber-ruby-core/lt.png)
+
+### Closed Ticket Lead Time
+
+![Closed Ticket Lead Time](repos/cucumber/cucumber-ruby-core/lts.png)
+
 ## Cucumber-JVM
+
+*6 Nov 2017*
+
+In the past 3 months (Aug-Nov 2017) the number of open issues has been reduced
+from 110 to 46. The average LT is now 42 days. This is a great improvement, mostly
+due to the adoption of [stalebot](https://github.com/probot/stale).
 
 *21 Aug 2017* - The number of open issues have been steadily growing
 from since the inception of the project, until May 2017.
 
-In 4 months
+In the past 4 months
 (May-Aug 2017) the number of open tickets has been halved from 220 to 110,
 which is a tremendous effort.
 
