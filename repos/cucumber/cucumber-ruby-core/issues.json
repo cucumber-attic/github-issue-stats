@@ -412,15 +412,23 @@
       "type": "User",
       "site_admin": false
     },
-    "labels": [],
+    "labels": [
+      {
+        "id": 744130673,
+        "url": "https://api.github.com/repos/cucumber/cucumber-ruby-core/labels/Slow%20Burner",
+        "name": "Slow Burner",
+        "color": "ff1245",
+        "default": false
+      }
+    ],
     "state": "open",
     "locked": false,
     "assignee": null,
     "assignees": [],
     "milestone": null,
-    "comments": 6,
+    "comments": 7,
     "created_at": "2017-07-09T21:12:39Z",
-    "updated_at": "2017-07-16T18:20:37Z",
+    "updated_at": "2017-11-10T17:23:03Z",
     "closed_at": null,
     "author_association": "MEMBER",
     "pull_request": {
@@ -874,15 +882,23 @@
       "type": "User",
       "site_admin": false
     },
-    "labels": [],
+    "labels": [
+      {
+        "id": 744130548,
+        "url": "https://api.github.com/repos/cucumber/cucumber-ruby-core/labels/Stale",
+        "name": "Stale",
+        "color": "ff1245",
+        "default": false
+      }
+    ],
     "state": "open",
     "locked": false,
     "assignee": null,
     "assignees": [],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2017-06-07T17:14:49Z",
-    "updated_at": "2017-07-12T09:14:24Z",
+    "updated_at": "2017-11-08T09:43:23Z",
     "closed_at": null,
     "author_association": "FIRST_TIME_CONTRIBUTOR",
     "pull_request": {
@@ -1024,9 +1040,9 @@
     "assignee": null,
     "assignees": [],
     "milestone": null,
-    "comments": 5,
+    "comments": 7,
     "created_at": "2017-05-16T07:54:17Z",
-    "updated_at": "2017-06-20T11:19:32Z",
+    "updated_at": "2017-11-08T10:18:29Z",
     "closed_at": null,
     "author_association": "NONE",
     "body": "**Copied issue from cucumber-ruby:** https://github.com/cucumber/cucumber-ruby/issues/1108\r\n\r\n## Configuration\r\n- Cucumber: 2.* (Confirmed issue on 2.4.0 & 2.0.0)\r\n- Gherkin: 4.1.1\r\n\r\nIssue __not__ present on Cucumber 1.3.20, that's why I assume it came with version 2.\r\n_Upon further inspection, it seems the introduction of Cucumber Core caused this issue_\r\n\r\n## Summary\r\n\r\nThe line numbers given to a step in the json formatter is always the line number of the Example row. Because of this, it's not possible to distinguish the steps from each other, as the line number is their unique value.\r\n\r\n## Expected Behavior\r\n\r\nIn Cucumber 1.3.20 the correct JSON output is given, I've cut out the important pieces:\r\n```gherkin\r\nFeature: This is line 1\r\n\r\n  Scenario Outline: This is line 3\r\n    Given this step is line 4\r\n    When when this step uses \"<outline-item>\" this should be line 5\r\n    Then this is line 6\r\n    Examples:\r\n      | outline-item   |\r\n      | example-line-9 |\r\n```\r\n```terminal\r\ncucumber --f json >> output.json\r\n```\r\n```json\r\n[\r\n  {\r\n    \"keyword\": \"Feature\",\r\n    \"name\": \"This is line 1\",\r\n    \"line\": 1,\r\n    \"elements\": [\r\n      {\r\n        \"keyword\": \"Scenario Outline\",\r\n        \"name\": \"This is line 3\",\r\n        \"line\": 9,\r\n        \"steps\": [\r\n          {\r\n            \"keyword\": \"Given \",\r\n            \"name\": \"this step is line 4\",\r\n            \"line\": 4 # <---\r\n          },\r\n          {\r\n            \"keyword\": \"When \",\r\n            \"name\": \"when this step uses \\\"example-line-9\\\" this should be line 5\",\r\n            \"line\": 5 # <---\r\n          },\r\n          {\r\n            \"keyword\": \"Then \",\r\n            \"name\": \"this is line 6\",\r\n            \"line\": 6 # <---\r\n          }\r\n        ]\r\n      }\r\n    ]\r\n  }\r\n]\r\n```\r\nNote how the step line numbers are the same as the actual line number of the step.\r\n\r\n## Current Behavior\r\n\r\nIn cucumber 2.4.0 the following JSON output is given:\r\n```JSON\r\n[\r\n  {\r\n    \"uri\": \"features/outline_test.feature\",\r\n    \"id\": \"this-is-line-1\",\r\n    \"keyword\": \"Feature\",\r\n    \"name\": \"This is line 1\",\r\n    \"description\": \"\",\r\n    \"line\": 1,\r\n    \"elements\": [\r\n      {\r\n        \"id\": \"this-is-line-1;this-is-line-3;;2\",\r\n        \"keyword\": \"Scenario Outline\",\r\n        \"name\": \"This is line 3\",\r\n        \"description\": \"\",\r\n        \"line\": 9, # <--- This is correct, it refers to the line number of the example\r\n        \"type\": \"scenario\",\r\n        \"steps\": [\r\n          {\r\n            \"keyword\": \"Given \",\r\n            \"name\": \"this step is line 4\",\r\n            \"line\": 9 # <--- Should be line 4\r\n          },\r\n          {\r\n            \"keyword\": \"When \",\r\n            \"name\": \"when this step uses \\\"example-line-9\\\" this should be line 5\",\r\n            \"line\": 9 # <--- Should be line 5\r\n          },\r\n          {\r\n            \"keyword\": \"Then \",\r\n            \"name\": \"this is line 6\",\r\n            \"line\": 9 # <--- Should be line 6\r\n          }\r\n        ],\r\n      }\r\n    ]\r\n  }\r\n]\r\n```\r\n\r\n## Context & Motivation\r\n\r\nThis issue has affected us at spriteCloud in the following way:\r\n- We run Cucumber and screenshots are saved on the server it ran on.\r\n- Then the screenshots are exported to the results database\r\n- Before exporting, the file is linked to the step where the screenshot was taken\r\nThis is going fine with regular Scenario's, but when it is an Outline we're not able to link the screenshot to the step and thus we can't visualize the given error.\r\n\r\n## Your Environment\r\n\r\n<!--- If you're reporting a bug, include as many relevant details about the environment you experienced the bug in -->\r\n* Version used: Cucumber 2.4.0\r\n* Operating System and version: Windows 10, Ubuntu 16 and other linux systems.\r\n* Link to your project: http://calliope.pro\r\n"
@@ -1060,15 +1076,23 @@
       "type": "User",
       "site_admin": false
     },
-    "labels": [],
+    "labels": [
+      {
+        "id": 744130548,
+        "url": "https://api.github.com/repos/cucumber/cucumber-ruby-core/labels/Stale",
+        "name": "Stale",
+        "color": "ff1245",
+        "default": false
+      }
+    ],
     "state": "open",
     "locked": false,
     "assignee": null,
     "assignees": [],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2017-03-31T12:16:43Z",
-    "updated_at": "2017-03-31T12:16:43Z",
+    "updated_at": "2017-11-08T09:43:27Z",
     "closed_at": null,
     "author_association": "MEMBER",
     "body": "## Summary\r\n\r\nThe Travis 2.4 (2.4.0 and 2.4.1) test can be failed with core dump.\r\n\r\n## Expected Behavior\r\n\r\nThe Travis Ruby 2.4 test is always succeeded.\r\n\r\n## Current Behavior\r\n\r\nI faced the core dump on Travis 2.4.0 and 2.4.1 test at once.\r\nAfter retry the test, the test was succeeded.\r\nThat is only for `cucumber-ruby-core`, not for `cucumber-ruby`.\r\nUnfortunately I do not have any log for that right now.\r\n\r\nWhen I ran the tests on my local environment (OS: Fedora 25, ruby 2.4.1 compiled from source), it was always succeeded.\r\nIt may be Ubuntu used on Travis, or Travis environment specified as a possibility.\r\n\r\n## Possible Solution\r\n\r\n1. Get failed log.\r\n2. Check related source code.\r\n2. if it is Ruby's issue, search similar issue on the BTS, or ask to Ruby language project on the BTS. [1]\r\n\r\n## Steps to Reproduce (for bugs)\r\n\r\n1. Run Ruby 2.4 test on Travis.\r\n\r\n## Context & Motivation\r\n\r\nWe like green success color on Travis.\r\n\r\n## Your Environment\r\n\r\n<!--- If you're reporting a bug, include as many relevant details about the environment you experienced the bug in -->\r\n* Version used: \r\n\r\nSource compiled Ruby.\r\n\r\n```\r\n$ ruby -v\r\nruby 2.4.1p111 (2017-03-22 revision 58053) [x86_64-linux]\r\n```\r\n\r\n* Operating System and version: Fedora 25\r\n* Link to your project: None\r\n\r\n"
@@ -1342,15 +1366,23 @@
       "type": "User",
       "site_admin": false
     },
-    "labels": [],
+    "labels": [
+      {
+        "id": 744130548,
+        "url": "https://api.github.com/repos/cucumber/cucumber-ruby-core/labels/Stale",
+        "name": "Stale",
+        "color": "ff1245",
+        "default": false
+      }
+    ],
     "state": "open",
     "locked": false,
     "assignee": null,
     "assignees": [],
     "milestone": null,
-    "comments": 1,
+    "comments": 2,
     "created_at": "2017-01-20T15:20:21Z",
-    "updated_at": "2017-06-07T17:34:15Z",
+    "updated_at": "2017-11-08T09:43:26Z",
     "closed_at": null,
     "author_association": "OWNER",
     "body": "In order to attract newcomers to contribute, we should help them where to start.\r\nWhenever you see a new issue, and you think it is a good fit for someone who isn't familiar with the codebase, tag it with `newcomers`.\r\n\r\nAll newcomers friendly issues in the cucumber org can be listed [here](https://github.com/issues?utf8=%E2%9C%93&q=is%3Aopen+is%3Aissue+user%3Acucumber+label%3Anewcomers+no%3Aassignee+) - we'll link to that from our yet-to-be-written \"How to contribute\" page on our website.\r\n\r\nThis is an ongoing effort, but what you can do right now is to have a scan at existing issues, tag a few of them. Then close this issue."
@@ -1438,9 +1470,9 @@
     "assignee": null,
     "assignees": [],
     "milestone": null,
-    "comments": 3,
+    "comments": 8,
     "created_at": "2017-01-04T23:50:53Z",
-    "updated_at": "2017-01-06T17:46:49Z",
+    "updated_at": "2017-11-13T13:17:57Z",
     "closed_at": null,
     "author_association": "NONE",
     "body": "Hello, want to use the `Cucumber::Core::Test::Case#outline?` method in the filter stage [1] but it seems that method is available only during execution added by `cucumber`.\r\n\r\nNow I'm not really sure whether the `outline?` method should be added in `core` or in `cucumber` but it makes sense to me to be available in `core` directly thus one can always rely on it. Presently my workaround is to use the `Cucumber::Core::Test::Case#keyword` method.\r\n\r\n[1] `cucumbler_config.filters << TestCaseManagerFilter.new(...)`\r\n\r\n-- core 1.5.0, cucumber 2.4.0"
@@ -1936,15 +1968,23 @@
       "type": "User",
       "site_admin": false
     },
-    "labels": [],
+    "labels": [
+      {
+        "id": 744130548,
+        "url": "https://api.github.com/repos/cucumber/cucumber-ruby-core/labels/Stale",
+        "name": "Stale",
+        "color": "ff1245",
+        "default": false
+      }
+    ],
     "state": "open",
     "locked": false,
     "assignee": null,
     "assignees": [],
     "milestone": null,
-    "comments": 1,
+    "comments": 2,
     "created_at": "2016-06-06T19:04:29Z",
-    "updated_at": "2016-06-08T21:25:44Z",
+    "updated_at": "2017-11-08T09:43:29Z",
     "closed_at": null,
     "author_association": "NONE",
     "body": "Hello, I observe the following behavior.\n= regular cucumber vs SIGINT\n- test is running\n- hit ctrl+c\n- test continue to be running and program exits only after it completes fully\n- hit ctrl+c again\n- cucumber exits without any clean-up taking place\n\n= cucumber with `Signal.trap('SIGINT') { exit(false) }`\n- test running\n- hit ctrl+c\n- test terminates and cucumber switches to After hook\n\nI think that the latter behavior makes much more sense. If user wants to interrupt, then ideally that will happen as soon as possible while After hook is executed to clean-up any underlying test environment. This is current behavior for SIGTERM.\n\nSo I was wondering what was the idea behind default SIGINT trap behavior. Why not keep same as SIGTERM? Not a big issue for me as I have a workaround. But would be nice to make behavior more convenient OOB for other users.\n\nbtw very nice cucumber takes care to run `After` hook on SIGTERM. I made some effort to put clean-up in `at_exit` when `After` is skipped but it seems `After` is never skipped. Or was the idea to have single Ctrl+C terminate after scenario finish, second Ctrl+C to drop into `After` hook? In such case it is not working like that.\n\nHope this is the right repo to file the issue against.\n"
@@ -2986,15 +3026,23 @@
       "type": "User",
       "site_admin": false
     },
-    "labels": [],
+    "labels": [
+      {
+        "id": 744130548,
+        "url": "https://api.github.com/repos/cucumber/cucumber-ruby-core/labels/Stale",
+        "name": "Stale",
+        "color": "ff1245",
+        "default": false
+      }
+    ],
     "state": "open",
     "locked": false,
     "assignee": null,
     "assignees": [],
     "milestone": null,
-    "comments": 4,
+    "comments": 5,
     "created_at": "2015-04-01T09:03:50Z",
-    "updated_at": "2015-04-03T18:16:17Z",
+    "updated_at": "2017-11-08T09:43:30Z",
     "closed_at": null,
     "author_association": "OWNER",
     "body": "Criteria:\n1. immutable\n2. equality comparison works (by location?)\n\nSee https://github.com/cucumber/cucumber-ruby-core/commit/2e85fcb5f0f32f52179da67e94c092950d4efed1#commitcomment-10458359\n"
@@ -3160,15 +3208,23 @@
       "type": "User",
       "site_admin": false
     },
-    "labels": [],
+    "labels": [
+      {
+        "id": 744130548,
+        "url": "https://api.github.com/repos/cucumber/cucumber-ruby-core/labels/Stale",
+        "name": "Stale",
+        "color": "ff1245",
+        "default": false
+      }
+    ],
     "state": "open",
     "locked": false,
     "assignee": null,
     "assignees": [],
     "milestone": null,
-    "comments": 8,
+    "comments": 9,
     "created_at": "2015-01-14T14:59:11Z",
-    "updated_at": "2017-06-13T19:04:09Z",
+    "updated_at": "2017-11-08T09:43:25Z",
     "closed_at": null,
     "author_association": "OWNER",
     "body": "See https://github.com/cucumber/cucumber-ruby-core/issues/73#issuecomment-68928910\n\nUser would like to be able to debug / pry a failed step, then resume the scenario. I think this should be possible.\n"
@@ -4468,7 +4524,15 @@
       "type": "User",
       "site_admin": false
     },
-    "labels": [],
+    "labels": [
+      {
+        "id": 744130548,
+        "url": "https://api.github.com/repos/cucumber/cucumber-ruby-core/labels/Stale",
+        "name": "Stale",
+        "color": "ff1245",
+        "default": false
+      }
+    ],
     "state": "open",
     "locked": false,
     "assignee": {
@@ -4512,9 +4576,9 @@
       }
     ],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2014-02-12T19:34:55Z",
-    "updated_at": "2014-02-19T17:32:14Z",
+    "updated_at": "2017-11-08T09:43:31Z",
     "closed_at": null,
     "author_association": "OWNER",
     "body": ""
@@ -5898,15 +5962,23 @@
       "type": "User",
       "site_admin": false
     },
-    "labels": [],
+    "labels": [
+      {
+        "id": 744130548,
+        "url": "https://api.github.com/repos/cucumber/cucumber-ruby-core/labels/Stale",
+        "name": "Stale",
+        "color": "ff1245",
+        "default": false
+      }
+    ],
     "state": "open",
     "locked": false,
     "assignee": null,
     "assignees": [],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2013-08-21T10:37:11Z",
-    "updated_at": "2013-08-21T10:37:11Z",
+    "updated_at": "2017-11-08T09:43:32Z",
     "closed_at": null,
     "author_association": "OWNER",
     "body": "They'll need tagging out of the main build because they'll be slow.\n"
