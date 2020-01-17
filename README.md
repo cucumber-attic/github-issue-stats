@@ -2,9 +2,12 @@
 
 GHIS is a command line tool that calculates and plots stats about a GitHub project's issues:
 
-* The number of open and closed issues/pull requests over time
-* Average lead time (time from open to closed) over time  
-* A simplified [Cumulative Flow Diagram](https://en.wikipedia.org/wiki/Cumulative_flow_diagram)
+* The number of open issues/pull requests over time
+  ![open](repos/cucumber/cucumber-jvm/open.png)
+* Average lead time in days (time from open to closed) over time  
+  ![lead time](repos/cucumber/cucumber-jvm/lt.png)
+* A [Cumulative Flow Diagram](https://en.wikipedia.org/wiki/Cumulative_flow_diagram)
+  ![cfd](repos/cucumber/cucumber-jvm/cfd.png)
 
 ## Prerequisites
 
